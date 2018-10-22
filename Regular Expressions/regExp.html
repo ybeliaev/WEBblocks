@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<title>Готовые решения для вёрстки</title>
+</head>
+<body>
+	<nav class="bar">
+		<a class="bar_link active" href="#">Base</a>
+		<a class="bar_link" href="menus/menu.html">Menus</a> 
+		<a class="bar_link" href="#">Tabs</a> 
+		<a class="bar_link" href="#">Images</a> 
+		<a class="bar_link" href="#">Buttons</a>
+		<a class="bar_link" href="#">Forms</a>
+		<a class="bar_link" href="#">Filters</a>
+		<a class="bar_link" href="#">RegExp</a> 
+		<a class="bar_link" href="#">Tables</a>   
+	</nav>
+	<header>
+		<h2>Text</h2>
+		<div class="item">
+			some text
+		</div>
+		<p>В JavaScript регулярные выражения часто используются с двумя строковыми методами: search() и replace().</p>
+		<p>Метод search() использует выражение для поиска соответствия и возвращает позицию совпадения.</p>
+		<p>Метод replace() возвращает измененную строку, где шаблон заменяется.</p>
+		<h2>Использование search() как String.method</h2>
+		<h3>Пример</h3>
+		<p>
+			var str = "Visit W3Schools!";
+			var n = str.search("W3Schools"); \\ n = 6
+		</p>
+		<h2>Использование search() в Regular Expression</h2>
+		<h3>Пример</h3>
+		<p>
+			var str = "Visit W3Schools";
+			var n = str.search(/w3schools/i); \\ n = 6
+		</p>
+		<h2>Использование replace() как String.method</h2>
+		<h3>Пример</h3>
+		<p>
+			var str = "Visit Microsoft!";
+			var res = str.replace("Microsoft", "W3Schools"); \\ 'visit W3Schools!'
+		</p>
+		<h2>Использование replace() в Regular Expression</h2>
+		<h3>Пример</h3>
+		<p>
+			var str = "Visit Microsoft!";
+			var res = str.replace(/microsoft/i, "W3Schools"); \\ 'Visit W3Schools!'
+		</p>
+		<h2>Модификаторы регулярных выражений</h2>
+		<table>
+			<tr>
+				<th>Modifier</th>
+				<th>Description</th>				
+			</tr>
+			<tr>
+				<td>i</td>
+				<td>Использовать нечувствительность к регистру</td>				
+			</tr>
+			<tr>				
+				<td>g</td>
+				<td>Выполните глобальное соответствие (найдите все совпадения, а не остановитесь после первого совпадения)</td>
+			</tr>
+			<tr>				
+				<td>m</td>
+				<td>Выполнение многострочного совпадения</td>
+			</tr>
+		</table>
+	</header>	
+	<script src="main.js"></script> 	
+</body>
+</html>

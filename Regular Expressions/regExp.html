@@ -31,28 +31,29 @@
 		<h2>Использование search() как String.method</h2>
 		<h3>Пример</h3>
 		<p>
-			var str = "Visit W3Schools!";
-			var n = str.search("W3Schools"); \\ n = 6
+			let str = "Visit W3Schools!";
+			let n = str.search("W3Schools"); \\ n = 6
 		</p>
 		<h2>Использование search() в Regular Expression</h2>
 		<h3>Пример</h3>
 		<p>
-			var str = "Visit W3Schools";
-			var n = str.search(/w3schools/i); \\ n = 6
+			let str = "Visit W3Schools";
+			let n = str.search(/w3schools/i); \\ n = 6
 		</p>
 		<h2>Использование replace() как String.method</h2>
 		<h3>Пример</h3>
 		<p>
-			var str = "Visit Microsoft!";
-			var res = str.replace("Microsoft", "W3Schools"); \\ 'visit W3Schools!'
+			let str = "Visit Microsoft!";
+			let res = str.replace("Microsoft", "W3Schools"); \\ 'visit W3Schools!'
 		</p>
 		<h2>Использование replace() в Regular Expression</h2>
 		<h3>Пример</h3>
 		<p>
-			var str = "Visit Microsoft!";
-			var res = str.replace(/microsoft/i, "W3Schools"); \\ 'Visit W3Schools!'
+			let str = "Visit Microsoft!";
+			let res = str.replace(/microsoft/i, "W3Schools"); \\ 'Visit W3Schools!'
 		</p>
-		<h2>Модификаторы регулярных выражений</h2>
+        <h2>Модификаторы регулярных выражений</h2>
+        <h3>Квадратные скобки используются для поиска ряда символов</h3>
 		<table>
 			<tr>
 				<th>Modifier</th>
@@ -70,7 +71,141 @@
 				<td>m</td>
 				<td>Выполнение многострочного совпадения</td>
 			</tr>
-		</table>
+        </table>
+        <h3>Шаблоны регулярных выражений</h3>
+        <table>
+            <tr>
+                <th>Expression</th>
+                <th>Description</th>
+                <th>Example</th>    
+            </tr>
+            <tr>
+                <td>[abc]</td>
+                <td>Найти любой из символов между скобками</td>
+                <td>
+                    <pre>
+                        let str = "Is this all there is?";
+                        let patt1 = /[h]/g; 
+                        let result = str.match(patt1);// h,h
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <td>[0-9]</td>
+                <td>Найдите любую из цифр между скобками</td>
+                <td>
+                    <pre>
+                        let str = "123456789";
+                        let patt1 = /[1-4]/g;
+                        let result = str.match(patt1);// 1,2,3,4
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <td>(x|y)</td>
+                <td>Найдите любое значение, разделенное |</td>
+                <td>
+                    <pre>
+                        let str = "re, green, red, green, gren, gr, blue, yellow";
+                        let patt1 = /(red|green)/g;
+                        let result = str.match(patt1); // green,red,green
+                    </pre>
+                </td>
+            </tr>
+        </table>
+        <h3>Метасимволы - это символы со специальным значением:</h3>
+        <table>
+                <tr>
+                    <th>Expression</th>
+                    <th>Description</th>
+                    <th>Example</th>    
+                </tr>
+                <tr>
+                    <td>\d</td>
+                    <td>Найти число</td>
+                    <td>
+                        <pre>
+                            let str = "Give 100%!"; 
+                            let patt1 = /\d/g;
+                            let result = str.match(patt1); // 1,0,0
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>\s</td>
+                    <td>Найти символ пробела</td>
+                    <td>
+                        <pre>
+                            let str = "Is this all there is?";
+                            let patt1 = /\s/g;
+                            let result = str.match(patt1); // , , ,
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>\b</td>
+                    <td>Найти совпадение в начале или в конце слова</td>
+                    <td>
+                        <pre>
+                            let str = "Visit W3Schools"; 
+                            let patt1 = /\bW3/g;
+                            let result = str.match(patt1); // W3
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>\uxxxx</td>
+                    <td>Найдите символ Юникода, заданный шестнадцатеричным числом xxxx</td>
+                    <td>
+                        <pre>
+                            let str = "Visit W3Schools. Hello World!"; 
+                            let patt1 = /\u0057/g;
+                            let result = str.match(patt1); // W,W
+                        </pre>
+                    </td>
+                </tr>
+            </table>
+            <h3>Квантификаторы</h3>
+            <table>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Description</th>
+                        <th>Example</th>    
+                    </tr>
+                    <tr>
+                        <td>n+</td>
+                        <td>Возвратит любую строку, содержащей хотя бы одну n</td>
+                        <td>
+                            <pre>
+                                let str = "Hellooo World! Hello W3Schools!"; 
+                                let patt1 = /o+/g;
+                                let result = str.match(patt1); // ooo,o,o,oo
+                            </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>n*</td>
+                        <td>Возвратит любую строку, содержащей ноль или более вхождений n</td>
+                        <td>
+                            <pre>
+                                let str = "Hellooo World! Hello W3Schools!"; 
+                                let patt1 = /lo*/g;
+                                let result = str.match(patt1); // l,looo,l,l,lo,l
+                            </pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>n?</td>
+                        <td>Возвратит любую строку, содержащей ноль или одно вхождение n</td>
+                        <td>
+                            <pre>
+                                let str = "1, 100 or 1000?";
+                                let patt1 = /10?/g;
+                                let result = str.match(patt1); // 1,10,10
+                            </pre>
+                        </td>
+                    </tr>
+                </table>
 	</header>	
 	<script src="main.js"></script> 	
 </body>

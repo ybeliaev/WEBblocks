@@ -72,17 +72,19 @@
             Ниже приведен шаблон заголовка таблицы стилей (style sheet header) вашей темы Rose. Он должен находится в начале файла стилей style.css, в первых строках:
         </p>
         <code>
-            /*   
-                Theme Name: Rose <br>
-                Theme URI: домашняя-страница-темы <br>
-                Description: краткое-описание-темы <br>
-                Author: ваше-имя <br>
-                Author URI: ваш-URI <br>
-                Template: напишите-здесь-наименование-родительской-темы--необязательное-поле <br>
-                Version: номер-версии--необязательное-поле <br>
+            <pre>
+                /*   
+                Theme Name: Rose 
+                Theme URI: домашняя-страница-темы 
+                Description: краткое-описание-темы 
+                Author: ваше-имя 
+                Author URI: ваш-URI 
+                Template: напишите-здесь-наименование-родительской-темы--необязательное-поле 
+                Version: номер-версии--необязательное-поле 
                 Развёрнутое описание темы/Лицензия-если-нужно.
                 
             */
+            </pre>           
 
         </code>
         <p>
@@ -102,7 +104,90 @@
            Этот файл будет нужен для подключения стилей:          https://wp-kama.ru/function-cat/podklyuchenie-faylov<br>  
            В файле подключаем функцию, которая правильно добавляет файл CSS стилей и регистрирует файл стилей, если он еще не был зарегистрирован - wp_enqueue_style():<br>  
            Ссылка на код … https://wp-kama.ru/function/wp_enqueue_style
-           </p>
+        </p>
+        <code>
+            <pre>
+                &lt;?php 
+            // правильный способ подключить стили и скрипты
+            add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
+            // add_action('wp_print_styles', 'theme_name_scripts'); // можно использовать этот хук он более поздний
+            function theme_name_scripts() {
+                wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+                wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
+            }
+            </pre>
+            
+                   
+        </code>
+        <p>
+            'theme_name_scripts' можно поменять на 'theme_name_styles' т.к сейчас стили подключаем <br>
+            Удаляем вторую строку,   'style-name'  можно заменить на main-style'  <br>
+            Теперь нужно указать путь к этому файлу со стилями. Нам поможет функция get_stylesheet_uri() . <br>
+            Она получает готовую ссылку (URL) на файл стилей style.css текущей темы.
+            Теперь запись в файле выглядит так:            
+        </p>
+        <code>
+            <pre>
+               &lt;?php
+                add_action( 'wp_enqueue_scripts', 'theme_name_styles' );
+                function theme_name_styles() {
+                    wp_enqueue_style( 'main-style', get_stylesheet_uri() );	
+                } 
+            </pre>                
+                
+        </code>
+        <p>Для подключения стилей из не корневой папки понадобится другая функция.</p>
+        <p>
+            get_template_directory_uri() Получает URL текущей темы, т.е функция выдаст путь до корневой папки. В нашем случае это папка TestTheme. <br>
+            Получаем путь к стилевому файлу из папки assets: <br>
+            wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.css' ); <br>
+            В результате имеем что-то вроде:
+        </p>
+        <code>
+            <pre>
+            &lt;?php 
+            add_action( 'wp_enqueue_scripts', 'theme_name_styles' );
+            function theme_name_styles() {	
+                wp_enqueue_style( 'animate-style', get_template_directory_uri() . '/assets/css/animate.css' );
+                wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/assets/css/bootstrap.css' );
+                wp_enqueue_style( 'main-style', get_stylesheet_uri() );	
+            } 
+            </pre>           
+                
+        </code>
+        <h3>Подключение картинок</h3>
+        <p>1. В style.css</p>
+        <p>Ищем в style.css url с путями к картинкам. Для этого CTRL + F и для поиска пишем часть пути к картинке, далее  ALT + Enter  - можем менять путь с учётом появившейся   папки assets.</p>
+        <p>2. В index.php</p>
+        <p>Делаем это с помощью функции bloginfo() с аргументом template_url, который вернёт URL директории текущей темы. Функция выводит на экран различную информацию о блоге, которая, в основном, указывается в настройках сайта.
+        </p>
+        <p>Например, пишем в  &lt;img src=' &lt;?php bloginfo( "template_url") ?&gt;/assets/…'</p>
+        <h3>Подключение скриптов</h3>
+        <p>Для подключения скриптов используем функцию wp_enqueue_script(). <br>           
+             Про функцию: <a href="https://wp-kama.ru/function/wp_enqueue_script">https://wp-kama.ru/function/wp_enqueue_script</a>  
+        </p>
+        <p>Итак, в файле index.php в конце вёрстки перед закрывающим тегом body пишем &lt;?php wp_footer(); ?&gt; </p>
+        <figure>
+            <img src="img/1/7.PNG" alt="WordPress" width="45%">
+        </figure>
+        <p>
+            Если, допустим, вы хотите вместо библиотеки jQuery из состава WordPress подключить её CDN-копию. Добавьте этот код в файл functions.php активной темы:
+        </p>
+        <code>
+            <pre>
+                add_action( 'wp_enqueue_scripts', 'my_scripts_method', 11 );
+                function my_scripts_method() {
+                    wp_deregister_script( 'jquery' );
+                    wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+                    wp_enqueue_script( 'jquery' );
+                }    
+                    
+            </pre>
+        </code>
+        <p>Результат:</p>
+        <figure>
+            <img src="img/1/8.PNG" alt="WordPress" width="80%">
+        </figure>
 	</header>	
 	<script src="../main.js"></script> 	
 </body>

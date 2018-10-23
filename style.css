@@ -69,11 +69,13 @@ nav {
 	flex: 0 0 auto;
 }
 h1, h2, h3 {
+	margin: 2rem auto;
 	text-align: center;
 }
 figure {
 	/* display: inline-block; */
 	text-align: left;
+	margin-bottom: 1rem;
 }
 
 /* ========================================================== */

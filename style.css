@@ -34,6 +34,7 @@
 	}
 	body {
 		box-sizing: border-box;
+		font-size: 1.6rem;
 	}
 
 body {
@@ -62,7 +63,17 @@ body{
 header{
 	flex: 1 1 auto;
 	padding: 1.2rem 2rem;
+	
+}
+nav {
+	flex: 0 0 auto;
+}
+h1, h2, h3 {
 	text-align: center;
+}
+figure {
+	/* display: inline-block; */
+	text-align: left;
 }
 
 /* ========================================================== */
@@ -73,7 +84,8 @@ header{
     background-color: #555;
 	height: 100vh;
 	overflow-y: scroll;
-    overflow-x: hidden;
+	overflow-x: hidden;
+	margin-right: 1rem;
 	
 }
 

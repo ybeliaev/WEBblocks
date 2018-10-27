@@ -98,8 +98,10 @@
             Если вёрстку НЕ переносить, а разбить на части, то начале файла можно сразу внести строку &lt;?php get header(); ?&gt; <br>
             А в  конце файла можно сразу внести строку &lt;?php get footer(); ?&gt; <br>
             Сoздать файлы header.php и footer.php, внести в них части кода
+        </p>
+        <p>
             Активируем тему в панели администратора. Внешний вид сайта будет не стилизованный. <br>
-            Создать папку assets в директории TestTheme. Туда скопировать папки img, js, css, fonts… Хотя, обычно стили переносятся в корневой <strong>style.css</strong>, поэтому папка css может быть лишней(разве для доп. стилей). Файл для стилей лучше один, import считается что тормозит загрузку страниц.
+            Создать папку assets в директории TestTheme. Туда скопировать папки img, js, css, fonts… Хотя, обычно стили переносятся в корневой style.css, поэтому папка css может быть лишней(разве для доп. стилей). Файл для стилей лучше один, import считается что тормозит загрузку страниц.
 
         </p>
         <h3>Подключение стилей</h3>
@@ -111,8 +113,9 @@
            Этот файл запускается самым первым при запуску WP. <br>
            functions.php будет нужен для подключения стилей: <a href="https://wp-kama.ru/function-cat/podklyuchenie-faylov" target="_blank">https://wp-kama.ru/function-cat/podklyuchenie-faylov</a>  <br>  
            В файле подключаем функцию, которая правильно добавляет файл CSS стилей и регистрирует файл стилей, если он еще не был зарегистрирован - wp_enqueue_style():<br>  
-           Ссылка на код … https://wp-kama.ru/function/wp_enqueue_style
+           Ссылка на код … <a href="https://wp-kama.ru/function/wp_enqueue_style">https://wp-kama.ru/function/wp_enqueue_style</a>  
         </p>
+        <p><span class = "info">wp_enqueue_scripts - хук, который регистрирует все стили и скрипты</span> </p> 
         <code>
             <pre>
                 &lt;?php 
@@ -127,9 +130,12 @@
             
                    
         </code>
+        <p><span class="info">get_stylesheet_uri() получает готовую ссылку (URL) на ФАЙЛ  стилей style.css текущей темы. Используется лишь для главного файла стилей. <br>
+            get_template_directory_uri() вернёт ссылку на ПАПКУ темы.
+        </span></p>        
         <p>
-            'theme_name_scripts' можно поменять на 'theme_name_styles' т.к сейчас стили подключаем <br>
-            Удаляем вторую строку,   'style-name'  можно заменить на main-style'  <br>
+            'theme_name_scripts' можно поменять на 'theme_name_styles' т.к сейчас стили подключаем. Название выбираем сами. <br>
+            Удаляем вторую строку,   'style-name'  можно заменить на 'main-style'  <br>
             Теперь нужно указать путь к этому файлу со стилями. Нам поможет функция get_stylesheet_uri() . <br>
             Она получает готовую ссылку (URL) на файл стилей style.css текущей темы.
             Теперь запись в файле выглядит так:            

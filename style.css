@@ -63,7 +63,9 @@ body{
 header{
 	flex: 1 1 auto;
 	padding: 1.2rem 2rem;
-	
+	text-align: left;
+	margin-right: 10%;
+	margin-left: 10%;
 }
 nav {
 	flex: 0 0 auto;
@@ -72,9 +74,13 @@ h1, h2, h3 {
 	margin: 2rem auto;
 	text-align: center;
 }
+p {
+	font-size: 2rem;
+	font-weight: 300;
+	margin-bottom: 2rem;
+}
 figure {
-	/* display: inline-block; */
-	text-align: left;
+	text-align: center;
 	margin-bottom: 1rem;
 }
 
@@ -119,20 +125,22 @@ figure {
 /* ========================================================== */
 /* 			            03. БЛОК HEADER                          */
 /* ========================================================== */
-h2 {
+/* h2 {
 	font-size: 3rem;
 	font-weight: 400;
-}
+} */
 .item {
+	
 	background-color: #adb0b4;
     padding: 1.6rem;
     margin: 2rem 0;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 .info {
-	background-color: #ddffdd;
-	border-left: 6px solid #4CAF50;
-	font-size: 1.6rem;
+	background-color: rgb(232, 126, 4);
+	border-left: 6px solid rgba(51, 102, 255, 0.8);;
+	color: rgba(255, 255, 255);
+	font-size: 2rem;
 	text-align: left;
-	padding: 8px;
+	padding: 2rem;
 }

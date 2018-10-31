@@ -21,6 +21,7 @@
 		<a class="bar_link" href="#">RegExp</a> 
         <a class="bar_link" href="#">Tables</a> 
         <a class="bar_link active" href="#">WordPress</a>  
+        <a class="bar_link" href="wp_menu.html">WordPress menu</a> 
 	</nav>
 	<header>
         <h2>Загрузка вёрстки и подключение стилей</h2>
@@ -28,27 +29,27 @@
         <p>В папке с установленным локальным сервером, напр. Open Server , находим папку с проектами. В Open Server это domains. Там создаём папку с названием проекта: myProject.loc. Сюда перенести содержимое скачанного архива WordPress. Запустить сайт на локальном сервере. Должно появиться такое окошко:
         </p>
         <figure>
-            <img src="img/1/1.PNG" alt="WordPress" width="40%">
+            <img src="img/1/1.PNG" alt="WordPress" >
         </figure>
         <h3>Создание базы данных</h3>
         <figure>
-            <img src="img/1/2.PNG" alt="WordPress" width="25%">
+            <img src="img/1/2.PNG" alt="WordPress" >
         </figure>
         <figure>
-            <img src="img/1/3.PNG" alt="WordPress" width="45%">
+            <img src="img/1/3.PNG" alt="WordPress" >
         </figure>
         <p>Заходим в phpMyAdmin, создаём новую базу данных, нажав на соответствующую ссылку в левом верхнем углу панели.Даём название базе (1), выбираем кодировку (2), и жмём на кнопочку (3)
         </p>
         <figure>
-            <img src="img/1/4.PNG" alt="WordPress" width="45%">
+            <img src="img/1/4.PNG" alt="WordPress" >
         </figure>
         <p>Создаём пользователя, нажав на «привелегии»</p>
         <figure>
-            <img src="img/1/5.PNG" alt="WordPress" width="45%">
+            <img src="img/1/5.PNG" alt="WordPress" >
         </figure>
         <p>Далее 'Добавить учетную запись пользователя'</p>
         <figure>
-            <img src="img/1/6.PNG" alt="WordPress" width="45%">
+            <img src="img/1/6.PNG" alt="WordPress" >
         </figure>
         <p>Устанавливаем имя пользователя(1). Если всплыло предупреждение, как в примере, добавьте к admin название базы данных\сайта, что придаст уникальности имени. Далее пароль(2) и привилегии(3).<br>
         Жмём «вперёд»! <br>          
@@ -57,7 +58,7 @@
         Жмём «устанавливаем WordPress».<br>
         Вводим логин, пароль. Теперь всё  -вошли в админку WP. 
         </p>
-        <span class="info">Меняем префикс таблицы на всё что угодно, но не оставлять по-умолчанию <code>_wp</code>. Это для безопасности!</span>
+        <p class="info">Меняем префикс таблицы на всё что угодно, но не оставлять по-умолчанию <code>_wp</code>. Это для безопасности!</p>
         <h3>Установка вёрстки</h2>
         <p>Установка будет происходить в папку с темами WP. <br>
             Минимальная тема WordPress состоит из двух файлов:<br>
@@ -130,9 +131,9 @@
             
                    
         </code>
-        <p><span class="info">get_stylesheet_uri() получает готовую ссылку (URL) на ФАЙЛ  стилей style.css текущей темы. Используется лишь для главного файла стилей. <br>
-            get_template_directory_uri() вернёт ссылку на ПАПКУ темы.
-        </span></p>        
+        <p class="info">get_stylesheet_uri() получает готовую ссылку (URL) на ФАЙЛ  стилей style.css текущей темы. Используется лишь для главного файла стилей. <br>         
+        get_template_directory_uri() вернёт ссылку на ПАПКУ темы.
+        </p>        
         <p>
             'theme_name_scripts' можно поменять на 'theme_name_styles' т.к сейчас стили подключаем. Название выбираем сами. <br>
             Удаляем вторую строку,   'style-name'  можно заменить на 'main-style'  <br>
@@ -176,16 +177,26 @@
         <p>Делаем это с помощью функции bloginfo() с аргументом template_url, который вернёт URL директории текущей темы. Функция выводит на экран различную информацию о блоге, которая, в основном, указывается в настройках сайта.
         </p>
         <p>Например, пишем в  &lt;img src=' &lt;?php bloginfo( "template_url") ?&gt;/assets/…'</p>
+
         <h3>Подключение скриптов</h3>
         <p>Для подключения скриптов используем функцию wp_enqueue_script(). <br>           
              Про функцию: <a href="https://wp-kama.ru/function/wp_enqueue_script">https://wp-kama.ru/function/wp_enqueue_script</a>  
         </p>
         <p>Итак, в файле index.php в конце вёрстки перед закрывающим тегом body пишем &lt;?php wp_footer(); ?&gt; </p>
-        <figure>
-            <img src="img/1/7.PNG" alt="WordPress" width="45%">
-        </figure>
+        <p>Далее, как и для подключения стилей, работаем в  файле <span>function.php</span>, но с использованием <span>wp_enqueue_script</span>, а не <span>wp_enqueue_style</span>:</p>
+        <code>
+            <pre>
+            &lt;?php 
+            add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
+            function my_scripts_method() {	
+                wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/script.css' );               	
+            } 
+            </pre>           
+                
+        </code>
+
         <p>
-            Если, допустим, вы хотите вместо библиотеки jQuery из состава WordPress подключить её CDN-копию. Добавьте этот код в файл functions.php активной темы:
+            Если, допустим, вы хотите ВМЕСТО библиотеки jQuery из состава WordPress( она там по умолчанию включена ) подключить её CDN-копию: добавьте этот код в файл functions.php активной темы:
         </p>
         <code>
             <pre>
@@ -200,7 +211,22 @@
         </code>
         <p>Результат:</p>
         <figure>
-            <img src="img/1/8.PNG" alt="WordPress" width="80%">
+            <img src="img/1/8.PNG" alt="WordPress" >
+        </figure>
+
+        <h3>Работа с шапкой сайта</h3>
+        <p>Используем language_attributes() которая ыводит атрибуты для HTML тега <span>&lt;html&gt;</span> со значениями текущего языка: lang="ru-RU". Т.е код выглядит так (язык задаётся в админке):</p>
+        <code>
+            <pre>
+                &lt;!DOCTYPE html&gt;
+                &lt;html &lt;?php language_attributes(); ?&gt;&gt;
+                &lt;head&gt;
+                ...
+            </pre>
+        </code>
+        <p>Далее используем функцию <span>bloginfo()</span>: <a href="https://wp-kama.ru/function/bloginfo" target="_blank">https://wp-kama.ru/function/bloginfo</a> с параметрами и функцию <span>home_url()</span></p>
+        <figure>
+            <img src="img/1/9.PNG" alt="WordPress" >
         </figure>
 	</header>	
 	<script src="../main.js"></script> 	

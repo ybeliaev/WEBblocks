@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="WP.css">
+	<title>Натяжка на WordPress</title>
+</head>
+<body>
+	<nav class="bar">
+		<a class="bar_link" href="../index.html">Base</a>
+		<a class="bar_link" href="menus/menu.html">Menus</a> 
+		<a class="bar_link" href="#">Tabs</a> 
+		<a class="bar_link" href="#">Images</a> 
+		<a class="bar_link" href="#">Buttons</a>
+		<a class="bar_link" href="#">Forms</a>
+		<a class="bar_link" href="#">Filters</a>
+		<a class="bar_link" href="#">RegExp</a> 
+        <a class="bar_link" href="#">Tables</a> 
+        <a class="bar_link" href="#">WordPress основы</a> 
+        <a class="bar_link active" href="./wp_menu.html">WordPress menu</a> 
+        <a class="bar_link " href="./wp_sidebar.html">WordPress sidebar</a>
+	</nav>
+	<header>
+        <h3>Регистрация меню в своей теме</h3>
+        <p>Нужно подвесить хук на событие <a href="https://wp-kama.ru/hook/after_setup_theme" target="_blank">after_setup_theme</a> с использованием <a href="https://wp-kama.ru/function/register_nav_menu" target="_blank">register_nav_menu()</a></p>
+        
+        
+        <code>
+            <pre>
+                add_action( 'after_setup_theme', 'action_after_setup' );
+                function action_after_setup() {
+                    // Действия
+                    register_nav_menu( 'top', 'Top Menu' );
+                    register_nav_menu( 'footer', 'Footer Menu' );
+                }
+            </pre>
+        </code>
+        <p>Теперь в админке <em>Внешний вид - Меню</em>  можно создать меню. После создания в админке меню его нужно подключить к вёрстке. В этом нам поможет функция <a href="https://wp-kama.ru/function/wp_nav_menu">wp_nav_menu()</a></p>
+        <p>Вот с подобным меню поработаем ( код нужно в обёртку <span>nav</span> поместить):</p>
+        <figure>
+            <img src="img/3/1.PNG" alt="WordPress" >
+        </figure>
+        <p>В <span>function.php</span> прописываем, убирая обёртку в элемент <span>div</span></p>
+        <code>
+            <pre>
+                wp_nav_menu( array(
+                    'theme_location'  => 'top',
+                    'container'       => null,                     
+                    'items_wrap'      => '<ul>%3$s</ul>',                    
+                ) );
+            </pre>
+        </code>
+        <p class="info">Внимание: у <span>WP</span> сложно повесить класс <span>.active</span>, т.к есть свой класс <a href="https://wp-kama.ru/function/wp_nav_menu" target="_blank">current-menu-item</a> . Поэтому или добавить этот класс в стилях или им заменить класс  <span>.active</span> При этом наш js не применяется для выделения пункта - <span>WP</span> позаботится сам.</p>
+
+	</header>	
+	<script src="../main.js"></script> 	
+</body>
+</html>

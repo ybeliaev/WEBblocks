@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="WP.css">
+	<title>Натяжка на WordPress</title>
+</head>
+<body>
+	<nav class="bar">
+		<a class="bar_link" href="../index.html">Base</a>
+		<a class="bar_link" href="menus/menu.html">Menus</a> 
+		<a class="bar_link" href="#">Tabs</a> 
+		<a class="bar_link" href="#">Images</a> 
+		<a class="bar_link" href="#">Buttons</a>
+		<a class="bar_link" href="#">Forms</a>
+		<a class="bar_link" href="#">Filters</a>
+		<a class="bar_link" href="#">RegExp</a> 
+        <a class="bar_link" href="#">Tables</a> 
+        <a class="bar_link" href="#">WordPress основы</a> 
+        <a class="bar_link" href="./wp_menu.html">WordPress menu</a> 
+        <a class="bar_link active" href="#">WordPress sidebar</a>
+	</nav>
+	<header>
+        <h3>Регистрация сайдбара в своей теме</h3>
+        <p class="info">Сайдбар - часть сайта, отведённая под виджеты</p>
+        <p>Для этого есть функция <a href="https://wp-kama.ru/function/register_sidebar" target="_blank">register_sidebar()</a></p>  
+        <p>Вместо <span>'name'=> sprintf(__('Sidebar %d'), $i )</span> с динамической переменной <span>$i</span> просто дадим имя</p>    
+        
+        <code>
+            <pre>
+                add_action( 'widgets_init', 'register_my_widgets' );
+                function register_my_widgets(){
+                    register_sidebar( array(
+                        'name'          => 'Sidebar Right',
+                        'id'            => "sidebar-right",
+                        'description'   => 'Правая колонка',
+                        'before_widget' => '<div  class="widget %2$s">',
+                        'after_widget'  => "</div>\n"
+                        
+                    ) );
+                }
+            </pre>
+        </code>
+        
+        <h3>Вывод сайдбара на экран</h3>
+        <p>Для этого <a href="https://wp-kama.ru/function/dynamic_sidebar" target="_blank">dynamic_sidebar()</a></p>
+        <p>Вариант первый:</p>
+        <p>В <span>index.php</span>помещаем строку вывода сайдбара в нужном месте <code>&lt;?php dynamic_sidebar( 'sidebar-right' ); ?&gt;</code></p>
+        <p>Вариант второй:</p>
+        <p>Создаём в корне файл <span>sidebar.php</span> где и прописываем функционал сайдбара, а в <span>index.php</span> помещаем на месте вывода сайбара строку <a href="https://wp-kama.ru/function/get_sidebar" target="_blank">&lt;?php get_sidebar(); ?&gt;</a></p>
+        <p>Ещё делается проверка на пустой сайдбар в <span>sidebar.php</span></p>
+        <code>
+            <pre>
+                &lt;?php if(is_active_sidebar(&#039;sidebar-right&#039;)) : ?&gt;
+                    &lt;aside&gt;
+                        &lt;?php dynamic_sidebar( &#039;sidebar-right&#039; )  ?&gt;
+                    &lt;/aside&gt;
+                &lt;?php endif; ?&gt;
+            </pre>
+        </code>
+        <h3>Добавляем виджеты</h3>
+        <p>Статика добавляется виджетом <span>HTML-код</span>Но как стилизовать динамически изменяемый виджет?</p>
+        <p>В аргументе register_sidebar(), меняем значение по-умолчанию для элементов <span>'before_widget' </span>и <span>'after_widget'</span>. И по примеру с меню меняем в <span>style.css</span>классы сайдбара на те, что даёт вордпресс ( в данном случае это класс<span>widget_categories</span> )</p>
+	</header>	
+	<script src="../main.js"></script> 	
+</body>
+</html>

@@ -26,7 +26,7 @@
 	</nav>
 	<header>
         <h3>Регистрация сайдбара в своей теме</h3>
-        <p class="info">Сайдбар - часть сайта, отведённая под виджеты</p>
+        <p class="info">Сайдбар по-умолчанию - это боковая колонка сайта. Но при работе в вордпресс это теоритически может быть любой частью сайта, применяющая виджеты.</p>
         <p>Для этого есть функция <a href="https://wp-kama.ru/function/register_sidebar" target="_blank">register_sidebar()</a></p>  
         <p>Вместо <span>'name'=> sprintf(__('Sidebar %d'), $i )</span> с динамической переменной <span>$i</span> просто дадим имя</p>    
         
@@ -64,7 +64,8 @@
         </code>
         <h3>Добавляем виджеты</h3>
         <p>Статика добавляется виджетом <span>HTML-код</span>Но как стилизовать динамически изменяемый виджет?</p>
-        <p>В аргументе register_sidebar(), меняем значение по-умолчанию для элементов <span>'before_widget' </span>и <span>'after_widget'</span>. И по примеру с меню меняем в <span>style.css</span>классы сайдбара на те, что даёт вордпресс ( в данном случае это класс<span>widget_categories</span> )</p>
+        <p>В аргументе register_sidebar(), меняем значение по-умолчанию для элементов <span>'before_widget' </span>и <span>'after_widget'</span>. И по примеру с меню меняем в <span>style.css</span>классы сайдбара на те, что даёт вордпресс ( в данном случае это класс<span>widget_categories</span> ), активный класс у сайдбара - <span>.current-cat</span> </p>
+        <p class="info">На какие классы менять нужно смотреть в отладчике, где видно, какие классы поставил вордпресс</p>
 	</header>	
 	<script src="../main.js"></script> 	
 </body>

@@ -55,7 +55,9 @@
             </pre>
         </code>
         <p class="info">Внимание: у <span>WP</span> сложно повесить класс <span>.active</span>, т.к есть свой класс <a href="https://wp-kama.ru/function/wp_nav_menu" target="_blank">current-menu-item</a> . Поэтому или добавить этот класс в стилях или им заменить класс  <span>.active</span> При этом наш js не применяется для выделения пункта - <span>WP</span> позаботится сам.</p>
-
+        <h3>Добавление миниатюр</h3>
+        <p>Для добавления миниатюр используется функция <a href="https://wp-kama.ru/function/add_theme_support">add_theme_support()</a></p>
+        <p>Добавляем <span>add_theme_support( 'post-thumbnails' );</span> в <span>function action_after_setup()</span>. Заходим в <em>Настройки - Медиафайлы </em> и устанавливаем нужный размер миниатюр по-умолчанию</p>
 	</header>	
 	<script src="../main.js"></script> 	
 </body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="WP.css">
+	<title>Натяжка на WordPress</title>
+</head>
+<body>
+	<nav class="bar">
+		<a class="bar_link" href="../index.html">Base</a>
+		<a class="bar_link" href="menus/menu.html">Menus</a> 
+		<a class="bar_link" href="#">Tabs</a> 
+		<a class="bar_link" href="#">Images</a> 
+		<a class="bar_link" href="#">Buttons</a>
+		<a class="bar_link" href="#">Forms</a>
+		<a class="bar_link" href="#">Filters</a>
+		<a class="bar_link" href="#">RegExp</a> 
+        <a class="bar_link" href="#">Tables</a> 
+        <a class="bar_link" href="#">WordPress основы</a> 
+        <a class="bar_link " href="./wp_menu.html">WordPress menu</a> 
+        <a class="bar_link " href="./wp_sidebar.html">WordPress sidebar</a>
+        <a class="bar_link active" href="./wp_posts.html">WordPress posts</a>
+	</nav>
+	<header>
+        <h3>Регистрация постов</h3>
+        <p>Есть функция для проверки наличия постов в текущей странице <a href="https://wp-kama.ru/function/have_posts" target="_blank">have_posts()</a> </p>
+        <p>Также в цикле важно использовать функцию <a href="https://wp-kama.ru/function/the_post">the_post()</a>. Также функцию <a href="https://wp-kama.ru/function/the_title">the_title()</a> выводящую на экран заголовок записи  и <a href="https://wp-kama.ru/function/the_permalink">the_permalink()</a>, который выводит ссылку (УРЛ) на пост, который в текущий момент обрабатывается в цикле.</p>
+        <p>Вставка в код <a href="https://wp-kama.ru/function/the_post_thumbnail">the_post_thumbnail()</a> выводит html код картинки-миниатюры текущего поста</p>
+        <p class="info">Разница с <a href="https://wp-kama.ru/function/get_the_post_thumbnail">get_the_post_thumbnail()</a> получает IMG тег миниатюры поста, если она существует и результат можно сохранить в переменную. Для вывода использовать <span>echo</span>, в этом случае будет равнозначно результату <span>the_post_thumbnail()</span></p>
+        <code>
+            <pre>
+                <main>
+                    &lt;?php if(have_posts()) : 
+                        while(have_posts()) : the_post() ?&gt;
+                            &lt;section&gt;
+                                &lt;h2&gt;&lt;?php the_title() ?&gt;&lt;/h2&gt;
+                                &lt;a href=&quot;&lt;?php the_permalink(); ?&gt;&quot;
+                                &lt;?php the_post_thumbnail('thumbnail'); ?&gt;
+                                &lt;p&gt;Текст поста&lt;/p&gt;
+                            &lt;/section&gt;
+                        &lt;?php endwhile; ?&gt;
+                    &lt;?php else : ?&gt;
+                        Постов нет!
+                    &lt;?php endif; ?&gt;
+                </main>
+            </pre>
+        </code>
+        <p>Как вносить посты в элемент <span>&lt;p&gt;Текст поста&lt;/p&gt;</span>?</p>
+        <p>Для этого есь функция, добавляющая дополнительные блоки <a href="https://wp-kama.ru/function/add_meta_box">add_meta_box()</a>, но обычно добавляют плагин <span>Custom Field Suite</span>, который позволяет добавлять пользовательские поля в свои сообщения </p>
+        <p>В админке появится раздел <em>Группа полей</em>, заполняем...</p>
+        <figure>
+            <img src="img/3/2.PNG" alt="WordPress" >
+        </figure>
+        <p>Если так оставить, то это будет добавлено ко ВСЕМ типам записей. Поэтому, в пункте <em>Типы записи</em> выбираем <em>post</em>. Далее <em>Опубликовыть</em>. Теперь в записях появляется дополнительное поле.</p>
+	</header>	
+	<script src="../main.js"></script> 	
+</body>
+</html>

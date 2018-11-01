@@ -56,6 +56,22 @@
             <img src="img/3/2.PNG" alt="WordPress" >
         </figure>
         <p>Если так оставить, то это будет добавлено ко ВСЕМ типам записей. Поэтому, в пункте <em>Типы записи</em> выбираем <em>post</em>. Далее <em>Опубликовыть</em>. Теперь в записях появляется дополнительное поле.</p>
+        <p>Теперь связываем пост с кодом: <code>&lt;p&gt; &lt;?php echo CFS->get('intro') ?&gt; &lt;/p&gt;</code></p>
+        <p>Что делать, когда не все записи отображаются?</p>
+        <p>На помощь прийдёт функция <a href="https://wp-kama.ru/function/the_posts_pagination">the_posts_pagination()</a>. Её логично НЕ помещать в блок-обёртку с постами, а в своё отдельное место кода. </p>
+        <code>
+            <pre>
+                &lt;main&gt;
+                .....
+                &lt;/main&gt;
+                &lt;?php the_posts_pagination(); ?&gt;
+            </pre>
+        </code>
+        <p>Теперь нужно сделать отдельный шаблон <span>single.php</span> для записей (post). </p>
+        <p>Создадим такой файл и он будет иметь подобный вид </p>
+        <figure>
+            <img src="img/3/3.PNG" alt="WordPress" >
+        </figure>
 	</header>	
 	<script src="../main.js"></script> 	
 </body>

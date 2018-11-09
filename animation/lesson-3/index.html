@@ -78,5 +78,26 @@
           </pre>
         </code>
       </section>
+      <section class="lesson-section">
+        <p>Есть ещё один вариант написания анимаций:</p>
+        <code>
+          <pre>
+            Правило:
+            @keyframes no-transform {
+              100% {
+                opacity: 1;  
+                transform: none;
+              }
+            }
+            И добавляется к элементу. Причём важно добавить свойство, которое будет меняться:
+            .header-down-arrow img { 
+              animation: no-transform 1s 1s ease-out forwards;
+              opacity: 0;  
+            ->  transform: translateY(4rem);
+            }
+
+          </pre>
+        </code>
+      </section>
   </body>
 </html>

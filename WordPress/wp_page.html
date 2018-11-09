@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="WP.css">
+	<title>Натяжка на WordPress</title>
+</head>
+<body>
+	<nav class="bar">
+		<a class="bar_link" href="../index.html">Base</a>
+		<a class="bar_link" href="menus/menu.html">Menus</a> 
+		<a class="bar_link" href="#">Tabs</a> 
+		<a class="bar_link" href="#">Images</a> 
+		<a class="bar_link" href="#">Buttons</a>
+		<a class="bar_link" href="#">Forms</a>
+		<a class="bar_link" href="#">Filters</a>
+		<a class="bar_link" href="#">RegExp</a> 
+        <a class="bar_link" href="#">Tables</a> 
+        <a class="bar_link" href="./WP.html">WordPress основы</a> 
+        <a class="bar_link " href="./wp_menu.html">WordPress menu</a> 
+        <a class="bar_link " href="./wp_sidebar.html">WordPress sidebar</a>
+        <a class="bar_link" href="./wp_posts.html">WordPress posts</a>
+        <a class="bar_link active" href="./wp_page.html">WordPress page</a>
+	</nav>
+	<header>
+        <h3>Создание страниц</h3>
+        <p>Для того чтобы создать страницу войдите в Wordpress с достаточными привилегиями для создания статей. Выберите <span>Administration > Pages > Add New</span>  для того чтобы начать работу с новой страницей.</p>
+        <h3>Создание шаблона страниц</h3>
+        <p>Создадим файл <span>page.php</span> </p>
+        <code>
+            <pre>
+                &lt;?php get_header(); ?&gt;
+
+                &lt;div id=&quot;content&quot; class=&quot;widecolumn&quot;&gt;
+
+                &lt;?php if (have_posts()) : while (have_posts()) : the_post();?&gt;
+                &lt;div class=&quot;post&quot;&gt;
+                    &lt;h2 id=&quot;post-&lt;?php the_ID(); ?&gt;&quot;&gt;&lt;?php the_title();?&gt;&lt;/h2&gt;
+                    &lt;div class=&quot;entrytext&quot;&gt;
+                        &lt;?php the_content(&#039;&lt;p class=&quot;serif&quot;&gt;Read the rest of this page &amp;raquo;&lt;/p&gt;&#039;); ?&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;?php endwhile; endif; ?&gt;
+                &lt;?php edit_post_link(&#039;Edit this entry.&#039;, &#039;&lt;p&gt;&#039;, &#039;&lt;/p&gt;&#039;); ?&gt;
+
+                &lt;?php get_footer(); ?&gt;
+            </pre>
+        </code>
+        <p>В случае, когда нужно отключить, напр., элемент сайдбара, который приходит с <span>&lt;?php get_header(); ?&gt;</span>, т.е. в <span>page.php</span> мы его отключить не можем, то :</p>
+        <p>В <span>index.php</span> в блоке кода сайдбара в условии <span>if</span> можем прописать условие появления сайдбара: <span>if( !is_page &amp;&amp; is_active_sidebar('sidebar-top'){ .... } )</span> </p>
+        
+	</header>	
+	<script src="../main.js"></script> 	
+</body>
+</html>

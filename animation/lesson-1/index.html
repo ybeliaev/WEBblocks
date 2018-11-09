@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Hero Header: Level Up your CSS Animation</title>
+    <!-- The default layout, resets and and text styling -->
+    <link href="stylesheets/main.css" rel="stylesheet">
+    <!-- Custom styling for the header -->
+    <link href="stylesheets/header.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <section class="header-content">
+        <img class="rocky-dashed animate-pop-in" src="images/rocky-dashed.svg">
+        <h1 class="header-title animate-pop-in">Your awesome landing page</h1>
+        <h3 class="header-subtitle animate-pop-in">A useful start for your projects</h3>
+        <p class="header-button animate-pop-in"><a href="#calls-to-action" class="button">Get started today</a></p>
+      </section>
+    </header>
+    <section>
+      <p>Эффект сползания фона плюс его затемнение достигается за счёт правила @keyframes:</p>
+    <code>
+      <pre>
+        @keyframes fade-slide-down {
+          0% {
+            opacity: 0;    
+            transform: translateY(-4rem);
+          }
+          100% {
+            opacity: 1;    
+            transform: none;
+          }
+        }
+      </pre>
+    </code>
+    <p>Правило применяется фону ,который получен с помощью псевдоэлемента:</p>
+    <code>
+      <pre>
+        header:before {  
+          content: &quot;&quot;;
+          position: absolute;
+          background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0, .8)),
+                      url(../images/background.jpg) no-repeat bottom;
+          background-size: cover;
+            bottom: 0;  
+            left: 0; 
+            right: 0;
+            top: 0;
+          opacity: 0;
+          z-index: -1;
+          animation: fade-slide-down 2s .5s cubic-bezier(0, 0.5, 0, 1) forwards; 
+        }
+      </pre>
+    </code>
+    <p>Расшифровка <span>animation</span>:</p>
+    <p>Порядок значений в свойстве <span>animation</span> должен быть следующий: <span>animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode</span> и, наконец, <span>animation-play-state</span>.</p>
+    <p><span>animation-name</span> - имя анимации из правила <span>@keyframes</span></p>
+    <p><span>animation-duration</span> - длительность анимации</p>
+    <p><span>animation-timing-function</span> - функция времени(<span>linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier(0,0,1,1)</span>)</p>
+    <p><span>animation-delay</span> - длительность задержки</p>
+    <p><span>animation-iteration-count</span> - число повторений анимации(можно <span>infinite</span> - бесконечно)</p>
+    <p><span>animation-direction</span> - направление, в котором анимация завершается. Значения этого свойства включают в себя <span>normal, reverse, alternate и alternate-reverse</span>.</p>
+    <p>Значение normal воспроизводит анимацию, как и намеревалось, от начала до конца. Значение <span>reverse воспроизводит анимацию точно наоборот, чем это определено в правиле <span>@keyframes, таким образом, начиная со 100% и работая в обратном н<span>аправлении до 0%.
+
+    Значение alternate воспроизведёт анимацию вперёд, а затем назад. В ключевых кадрах это включает выполнение вперёд от 0% до 100%, а затем в обратном направлении от 100% до 0%. Используя свойство <span>animation-iteration-count</span> можно ограничить количество раз, когда анимация работает вперёд и назад. Счёт начинается с 1, когда анимация проходит вперёд от 0% до 100%, а затем добавляется 1, когда анимация проходит в обратном порядке от 100% до 0%. Объединение в общей сложности двух итераций. Значение <span>alternate</span> также инвертирует любые функции времени при воспроизведении в обратном направлении. Если анимация использует значение <span>ease-in</span> идущее от 0% до 100%, то затем использует значение <span>ease-out</span> идущее от 100% до 0%.
+
+    И, наконец, значение <span>alternate-reverse</span> сочетает оба значения <span>alternate</span> и <span>reverse</span>, запуская анимацию назад, а затем вперёд. Значение <span>alternate-reverse</span> начинается со 100% и выполняется до 0%, а затем снова обратно до 100%.</p>
+    <p><span>animation-fill-mode</span> -  определяет, как элемент должен быть стилизован — до, после или до и после запуска анимации. Свойство  принимает четыре значения ключевых слов, включая <span>none, forwards, backwards и both. Значение <span>none</span> не будет применять любые стили к элементу до или после того, как анимация запущена. <br>
+    Значение <span>forwards</span> сохранит стили, объявленные в последнем указанном ключевом кадре. На эти стили, однако, могут повлиять значения свойств <span>animation-direction</span> и <span>animation-iteration-count</span>, меняя, где анимация заканчивается.</p>
+    <p><span>animation-delay</span> - позволяет анимации воспроизводиться или остановиться на паузу, с помощью ключевых слов <span>running</span> и <span>paused</span>, соответственно. Когда анимация снимается с паузы, она возобновляет работу из текущего состояния, а не начинается снова с самого начала.</p>
+
+    </section>
+    
+
+  </body>
+</html>

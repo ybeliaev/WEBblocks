@@ -1,6 +1,5 @@
 .js-loading *, .js-loading *:before, .js-loading *:after {
-  -webkit-animation-play-state: paused !important;
-          animation-play-state: paused !important;
+  animation-play-state: paused !important;
 }
 
 header {
@@ -191,3 +190,5 @@ header:after {
             transform: rotateZ(-4deg);
   }
 }
+
+

@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Hero Header: Level Up your CSS Animation</title>
+    <!-- The default layout, resets and and text styling -->
+    <link href="stylesheets/main.css" rel="stylesheet">
+    <!-- Custom styling for the header -->
+    <link href="stylesheets/header.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <section class="header-content">
+        <img class="rocky-dashed animate-pop-in" src="images/rocky-dashed.svg">
+        <h1 class="header-title animate-pop-in">Your awesome landing page</h1>
+        <h3 class="header-subtitle animate-pop-in">A useful start for your projects</h3>
+        <p class="header-button animate-pop-in"><a href="#calls-to-action" class="button">Get started today</a></p>
+      </section>
+      <section class="header-down-arrow">
+        <img src="images/downarrow.png" width="50">
+      </section>      
+    </header>
+    <section class="lesson-section">
+        <h3>Создаём мигающий и пропадающий знак скрола</h3>
+        <p>Вставляем обычную картинку скрола со свойством <span>bottom: 4vh</span></p>
+        <code>
+          <pre>
+            .header-down-arrow {              
+              bottom: 4vh;
+              left: 0;
+              position: absolute;
+              right: 0;
+              text-align: center;
+              z-index: 10;
+            }
+          </pre>
+        </code>
+        <p>Создаём правило ( будет эфект появления и поднятия снизу ):</p>
+        <code>
+          <pre>
+            @keyframes fade-slide-up {
+            0% {
+              opacity: 0;
+              transform: translateY(4rem);
+              }
+            100% {
+              opacity: 1;
+              transform: none;
+              }
+            }
+
+            .header-down-arrow img {
+              animation: fade-slide-up 1s 1s ease-out forwards;
+              opacity: 0;
+            }
+          </pre>
+        </code>
+        <p>Создаём правило эффекта пульсации:</p>
+        <code>
+          <pre>
+            @keyframes pulse {
+              0% {
+                opacity: 1;
+                transform: none;
+              }
+              50% {
+                opacity: .8;
+                transform: scale(.8);
+              }
+              100% {
+                opacity: 1;
+                transform: none;
+              }
+            }
+            
+            .header-down-arrow {
+              animation: pulse 2s 3s ease-out infinite;
+              ...
+            }
+          </pre>
+        </code>
+      </section>
+  </body>
+</html>

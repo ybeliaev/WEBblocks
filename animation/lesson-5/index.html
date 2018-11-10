@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <title>Hero Header Example: Blurry background</title>
+    <!-- The default layout, resets and and text styling -->
+    <link href="stylesheets/main.css" rel="stylesheet">
+    <!-- Custom styling for the header -->
+    <link href="stylesheets/header.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <section class="header-bg-blurry"></section>
+      <section class="header-content">
+        <h1 class="header-title js-animate-letters animate-fade-zoom">
+          <span>I</span>
+          <span>M</span>
+          <span>A</span>
+          <span>G</span>
+          <span>I</span>
+          <span>N</span>
+          <span>E</span>
+        </h1>
+      </section>
+      <section class="header-down-arrow">
+        <img src="images/downarrow.png" width="50">
+      </section>      
+    </header>
+    <section class="lesson-section">
+        <h3>Эффект блюра</h3>
+        <p>Достигается наложением двух картинок, первая из которых с блюром</p>
+        <p>Стили для основной картинки, которая "вешается" псевдоэлементом на header. <br> Картинка растянута width: 160vw и приведена до нормальных пропорций отрицательными значениями bottom, left, top. z-index отрицательный, т.к. сначала на переднем фоне будет картинка с блюром.</p>
+        <code>
+          <pre>
+            header:before {
+              animation: zoom-back 20s .5s cubic-bezier(0, 0.5, 0, 1) forwards;  
+              background: linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,1)),
+                          url(../images/background.jpg) no-repeat bottom;
+              background-size: cover;
+                bottom: -30vh;
+              content: "";
+                left: -30vw;
+              opacity: 0;
+              position: absolute;
+                right: 0;
+                top: -30vh;
+              width: 160vw;
+              z-index: -1;
+            }
+          </pre>
+        </code>
+        <p>Правило:</p>
+
+        <code>
+          <pre>
+            @keyframes zoom-back {
+              0% {
+                opacity: 0;   
+                transform: translateZ(0) scale(1.2);
+              }
+              100% {
+                opacity: 1;
+                transform: translateZ(-4em) scale(1.2);
+              }
+            }
+          </pre>
+        </code>
+        <p class="info">
+          translateZ() или другая аналогичная функция, где затрагивается ось Z работает в том случае, если в CSS установлена  <a href="https://idg.net.ua/blog/uchebnik-css/ispolzovanie-css/transform/3d" target="_blanck">перспектива</a>. Поэтому элементу header заданы свойства transform-style: preserve-3d; perspective: 100px; <br>
+          transform-style:  preserve-3d - дочерние элементы будут отображаться в 3D-пространстве.
+        </p>
+        <code>
+          <pre>
+            header {
+              align-items: center;
+              background: #000;
+              display: flex;
+              font-size: 18px;
+              height: 100vh;
+              justify-content: center;
+              overflow: hidden;
+              position: relative;
+              text-align: center;
+              transform-style: preserve-3d;
+              perspective: 100px;
+            }
+          </pre>
+        </code>
+        <p>Картинке с блюром даются такие же стили:</p>
+        <code>
+          <pre>
+            .header-bg-blurry {
+              animation: zoom-back 10s .5s cubic-bezier(0, 0.5, 0, 1) forwards,
+                         fade-in-out 8s  .5s ease-out forwards;
+              background: url(../images/background-blurry.jpg) no-repeat bottom;
+              background-size: cover;
+                bottom: -30vh;
+                left: -30vw;
+              opacity: 0;
+              position: absolute;
+                right: 0;
+                top: -30vh;
+              width: 160vw;;
+            }
+          </pre>
+          <p class="info">Здесь два правила идут подряд, разделённые запятой. Это возможно , т.к. у них одинаковое значение задердки - 0.5s</p>
+          <p>Правила:</p>
+          <code>
+            <pre>
+              @keyframes fade-in-out {
+                0% {
+                  opacity: 0;
+                }
+                10% {
+                  opacity: 1; Так добиваемся эффекта вспышки и медленного угасания
+                }
+                100% {
+                  opacity: 0;
+                }
+              }
+            </pre>
+          </code>
+        </code>
+      </section>
+      <section class="lesson-section">
+        <h3>Анимация букв</h3>
+        <p>Все литеры обёрнуты в тег h1 c классом .header-title плюс каждая литера в span</p>
+        <code>
+          <pre>
+            .header-title {
+              animation: zoom-title 10s .5s cubic-bezier(0,0,0,1) forwards;
+              font-size: 92px;
+              opacity: 0;
+            }
+          </pre>
+        </code>
+        <code>
+          <pre>
+            @keyframes zoom-title {
+              0% {
+                opacity: 0;
+                transform: translateZ(1em);
+              }
+              100% {
+                opacity: .8;
+                transform: none;
+              }
+            }
+          </pre>
+        </code>
+        <p class="info">Важно: header являющийся родителем имеет стили, позволяющие работать с осью Z: transform-style: preserve-3d; perspective: 100px;</p>
+        <p class="info">Также, если transform: translateZ(1em) изменить на transform: translateZ(10em) то анимация произойдёт "за кадром" ,т.к. литеры сдвинуты слишком далеко </p>
+        <code>
+          <pre>
+            .header-title span {
+              animation: no-transform linear 4s forwards;
+              opacity: 0;
+            }
+
+            .header-title span:nth-child(1) { animation-delay: 3.7s; }
+            .header-title span:nth-child(2) { animation-delay: 4.5s; }
+            .header-title span:nth-child(3) { animation-delay: 3.6s; }
+            .header-title span:nth-child(4) { animation-delay: 1.1s; }
+            .header-title span:nth-child(5) { animation-delay: 3.1s; }
+            .header-title span:nth-child(6) { animation-delay: 4.3s; }
+            .header-title span:nth-child(7) { animation-delay: 5s; }
+
+            @keyframes no-transform {
+              100% {
+                opacity: 1;
+              transform: none;
+              }
+            }
+          </pre>
+        </code>
+      </section>  
+
+    <script>
+      // Prepare the body tag by adding a "js-paused" class
+      document.body.className += " js-loading";
+
+      // Listen for when everything has loaded
+      window.addEventListener("load", showPage, false);
+
+      function showPage() {
+        // Remove the "js-paused" class
+        document.body.className = document.body.className.replace("js-loading","");
+      }
+    </script>
+  </body>
+</html>

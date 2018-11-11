@@ -249,7 +249,7 @@ a {
           justify-content: center;
 }
 
-p {
+.content p {
   font-size: 4.7em;
   max-width: 80%;
 }

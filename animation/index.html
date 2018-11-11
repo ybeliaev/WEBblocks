@@ -8,7 +8,107 @@
   </head>
   <body>
     <article class="content">
-      <p>... and here is some text. This text shows how <a href="https://cssanimation.rocks/#fresh">CSS animation</a> can help us make links be more fun and useful...</p>
+      <p>... and here is some text. This text shows how <a href="#/">CSS animation</a> can help us make links be more fun and useful...</p>
     </article>
+    <section class="lesson-section">
+      <h3>Анимируем полоску под ссылкой</h3>
+      <p>Лучше это делать псевдоэлементом</p>
+      <p class="info">Иногда удобно использовать em. Ним устанавливается зависимость от размера шрифта</p>
+      <code>
+        <pre>
+          a {
+            color: #2F56B0;
+            position: relative;
+            text-decoration: none;  
+            transition: color .4s ease-out; Для изменения цвета шрифта при эффекте hover
+          }
+
+          a::after {
+            border-radius: 1em; 
+            border-top: .1em solid #2F56B0; Собственно сама полоска
+              bottom: .14em;
+            content: "";
+              left: 0;
+            position: absolute;
+              right: 100%;  
+            transition: border-color .4s ease-out;
+          }
+
+          a:hover {
+            color: #457DFB;
+            right: 0;
+            text-decoration: none;
+          }
+
+          a:hover::after { 
+            animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
+            border-color: #457DFB;
+          }
+        </pre>
+      </code>
+      <p>Само правило анимации:</p>
+      <code>
+        <pre>
+          @keyframes anchor-underline {
+            0%, 10% {
+              left: 0;
+              right: 100%;
+            }
+            40%, 60% {
+              left: 0;
+              right: 0;
+            }
+            90%, 100% {
+              left: 100%;
+              right: 0;
+            }
+          }
+        </pre>
+      </code>
+    </section>
+    <section class="lesson-section">
+      <h3>Анимация попроще.</h3>
+      <p>Навесим анимацию на это <span class="animation">слово</span> </p>
+      <p class="info">Как работает left right на абсолютно спозиционированном элементе: left:0 right:100% загонит элемент в левый угол, left:100% right:0 в правый. Свойства left right работают как margin</p>
+      <p>Собственно "код"</p>
+      <code>
+        <pre>
+          span.animation::after {
+            border-radius: 1em;
+            border-top: .1em solid hsl(160, 100%, 70%);
+              bottom: .14em;
+            content: "";
+            position: absolute;
+              left: 0;  
+              right: 100%;  
+            transition: right .4s ease-out;
+          }
+
+          span.animation:hover:after { 
+            right: 0; 
+          }
+        </pre>
+      </code>
+      <p>Похожий приём, но полоска расходится от центра: <span class="anim-from-center">слово</span> </p>.</p>
+      <code>
+        <pre>
+          span.anim-from-center::after {
+            border-radius: 1em;
+            border-top: .1em solid hsl(160, 100%, 70%);
+              bottom: .14em;
+            content: "";
+            position: absolute;
+              left: 51%;  
+              right: 51%;  
+            transition: all .4s ease-out;
+          }
+          
+          span.anim-from-center:hover:after { 
+            left:  0;  
+            right: 0;
+          }
+        </pre>
+      </code>
+    </section>
   </body>
 </html>

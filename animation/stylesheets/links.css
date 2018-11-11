@@ -3,8 +3,7 @@
 a {
   color: #2F56B0;
   position: relative;
-  text-decoration: none;
-  -webkit-transition: color .4s ease-out;
+  text-decoration: none;  
   transition: color .4s ease-out;
 }
 
@@ -15,8 +14,7 @@ a::after {
   content: "";
     left: 0;
   position: absolute;
-    right: 100%;
-  -webkit-transition: border-color .4s ease-out;
+    right: 100%;  
   transition: border-color .4s ease-out;
 }
 
@@ -26,26 +24,12 @@ a:hover {
   text-decoration: none;
 }
 
-a:hover::after {
-  -webkit-animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
-          animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
+a:hover::after { 
+  animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
   border-color: #457DFB;
 }
 
-@-webkit-keyframes anchor-underline {
-  0%, 10% {
-    left: 0;
-    right: 100%;
-  }
-  40%, 60% {
-    left: 0;
-    right: 0;
-  }
-  90%, 100% {
-    left: 100%;
-    right: 0;
-  }
-}
+
 
 @keyframes anchor-underline {
   0%, 10% {
@@ -60,4 +44,47 @@ a:hover::after {
     left: 100%;
     right: 0;
   }
+}
+/* ****** Styles for easy animation ******* */
+span.animation  {
+  position: relative;
+  color: hsl(160, 100%, 70%);
+  font-size: 36px;
+  cursor: pointer;
+}
+
+span.animation::after {
+  border-radius: 1em;
+  border-top: .1em solid hsl(160, 100%, 70%);
+    bottom: .14em;
+  content: "";
+  position: absolute;
+    left: 0;  
+    right: 100%;  
+  transition: right .4s ease-out;
+}
+span.animation:hover:after { 
+  right: 0; 
+}
+/* ****** Styles for  animation from  center of word  ******* */
+span.anim-from-center  {
+  position: relative;
+  color: hsl(160, 100%, 70%);
+  font-size: 36px;
+  cursor: pointer;
+}
+
+span.anim-from-center::after {
+  border-radius: 1em;
+  border-top: .1em solid hsl(160, 100%, 70%);
+    bottom: .14em;
+  content: "";
+  position: absolute;
+    left: 51%;  
+    right: 51%;  
+  transition: all .4s ease-out;
+}
+span.anim-from-center:hover:after { 
+  left:  0;  
+  right: 0;
 }
